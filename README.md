@@ -34,3 +34,30 @@
   - Note that “Content Filtering” will fail until licensed or if UDP/2257 is blocked from SonicWALL Firewall to SonicWALL GRID CFS Servers. https://support.software.dell.com/kb/sw9405
   - MTU Discovery: Paste determined value into WAN/Internet interface used in test
   - Note: Some ISP’s values change each time you test. In that case review ISP’s KB for optimum MTU
+
+## One Touch Configuration
+  ### System > Administration
+    - Password must be changed every 90 days (not that reccomended, honestly)
+    - Bar repeated pssword changes for 4 changes.
+    - Enforce password complexity: Require alphabetic, numeric, and symbolic characters.
+    - Apply the above password contrainst for all user categories.
+    - Enable administrator/user lockout.
+    - Failed login attempts per minuite before lockout: 7
+    - Enable inter-administrator Messaging polling interval (seconds): 10
+  ### Network > Interfaces
+    - Any interface allowing HTTP management is replaced with HTTPS Management
+    - Any setting to 'Add rule to enable redirect from HTTP to HTTPS' is disabled.
+    - Ping Management is disabled on all interfaces.
+   
+   ### Network > Zone
+    - Intrusion Prevention is enabled on all applicable default Zones.
+    - Gateway Anti-Virus protection is enabled on all applicable default Zones.
+    - Anti-spyware protection is enabled on all applicable default Zones.
+  
+  ### Network > DNS
+    - Enable DNS Rebinding protection.
+    - DNS Rebinding Action: Log Attack & Drop DNS Reply
+  
+  ### Firewall > Access Rules
+    - Any Firewall policy with an Action of Deny, the Action is changed Discard.
+    - Source IP Address connection limiting with a threshold of 128 connections is enabled for all firewall police
