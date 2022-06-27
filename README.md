@@ -60,4 +60,59 @@
   
   ### Firewall > Access Rules
     - Any Firewall policy with an Action of Deny, the Action is changed Discard.
-    - Source IP Address connection limiting with a threshold of 128 connections is enabled for all firewall police
+    - Source IP Address connection limiting with a threshold of 128 connections is enabled for all firewall polices.
+  
+  ### Firewall Settings > Advanced
+    - Turn on 'Enable Stealth Mode'
+    - Turn on 'Randomize IP ID'
+    - Turn off 'Decrement IP TTL for Forwarded Traffic'
+    - Connections are set to: 'Maximum DPI Connections (DPI Services Enabled'
+  
+  ### Firewall Settings > Flood Proctections
+    - Turn on 'Enable TCP Handshake Timeout'
+  
+  ### VPN > Advanced
+    - Turn on 'Enable IKE Dead Peer Detection'
+    - Turn on 'Enable Dead Peer Detection for Idle VPN Sessions'
+    - Turn on 'Enable Fragmented Packet Handling'
+    - Turn on 'Ifnore DF (Don't Fragment) Bit'
+    - Turn on 'Enable NAT Traversal'
+    - Turn on 'Clean up Active Tunnels when Peer Gateway DNS Name Resolves To A Different Address'
+    - Turn on 'Preserve IKE port for Pass Through Connections'
+  
+  ### Security Services > Gateway Anti-Virus
+    - If licensed, Enable Gateway Antivirus
+    - Configure Gateway AV Settings: Turn on 'Disable SMTP Responses'
+    - Configure Gateway AV Settings: Turn off 'Disable detetion of EICAR test virus'
+    - Configure Gateway AV Settings: Turn on 'Enable HTTP Byte-Range requests with Gateway AV'
+    - Configure Gateway AV Settings: Turn on 'Enable FTP Rest Request with Gateway AV'
+    - Configure Gateway AV Settings: Turn off 'Enable HTTP Clientless Notification Alerts'
+  
+  ### Security Services > Intrusion Prevention
+    - If licensed, Enable IPS
+    - Turn on 'Prevent All and Detect All for High Priority Attacks'
+    - Turn on 'Prevent All and Detect All for Medium Priority Attacks'
+    - Turn on 'Prevent All and Detect All for Low Priority Attacks'
+  
+  ### Security Services ? Anti-Spyware
+    - If licensed, Enable Anti-Spyware
+    - Turn on 'Prevent All and Detect All for High Priority Attacks'
+    - Turn on 'Prevent All and Detect All for Medium Priority Attacks'
+    - Turn on 'Prevent All and Detect All for Low Priority Attacks'
+    - Configure Anti-Spyware Settings: Turn on 'Disable SMTP Responses'
+    - Configure Anti-Spyware Settings: Turn off 'Enable HTTP Clientless Notification Alerts'
+  
+  ### Log > Settings 
+    - Set Logging Level: Debug
+    - Set Alert Level: Warning
+  
+  ### Log > Name Resolution
+    - Set Name Resolution Method to 'DNS the NetBIOS'
+  
+  ### Internal Settings
+    - Turn on 'Protect Against TCP State Manipulation DoS'
+    - Turn on 'Apply IPS Signatures Bidirectionally'
+    - Allow launching of AppFlow monitor in stand-alone browser frame
+    - Enable Visualization UI for Non-Admin/Config Users
+
+## Network
