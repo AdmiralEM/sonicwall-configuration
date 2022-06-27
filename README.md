@@ -1,6 +1,6 @@
 # Sonicwall Configuration Outline
 
-FIRST STEP OUT OF THE BOX
+## FIRST STEP OUT OF THE BOX
   - Start from Safemode: (Recommended)
     - Enter Safemode by booting up the firewall – then using a paper clip or similar sized item, insert 
       into the small hole either in front or back of the firewall, and hold the “button” down for 10 
@@ -13,4 +13,4 @@ FIRST STEP OUT OF THE BOX
     - Register the appliance (you cannot load firmware unless the appliance is registered (if you are 
       not in Safemode))
     - Load latest firmware and boot to factory defaults* 
-  Reason: Issues in configuration created in old/initial release RTM firmware can survive firmware upgrades; this step eliminates this chance, however small it may be.
+Reason: Issues in configuration created in old/initial release RTM firmware can survive firmware upgrades; this step eliminates this chance, however small it may be.
