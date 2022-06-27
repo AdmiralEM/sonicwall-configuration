@@ -20,21 +20,6 @@
   - Export Settings
   - Create Backup
 
-## SYSTEM
-  - System >>> Administration
-  - For PCI/Better Security: Change super user administration account from ‘admin’
-  - Enable Enhanced Audit Logging (new in 6.2.5 for UC APL certification)
-  - Change HTTPS management port from 443 to other (i.e. 8443)
-  - Change the default Admin Timeout from 5 minutes, to your preferred amount
-  - System >>> Time
-  - Set time automatically using NTP
-  - Don’t configure additional NTP Servers unless needed for internal synchronization
-  - System >>> Diagnostics
-  - Check Network Settings
-  - Note that “Content Filtering” will fail until licensed or if UDP/2257 is blocked from SonicWALL Firewall to SonicWALL GRID CFS Servers. https://support.software.dell.com/kb/sw9405
-  - MTU Discovery: Paste determined value into WAN/Internet interface used in test
-  - Note: Some ISP’s values change each time you test. In that case review ISP’s KB for optimum MTU
-
 ## One Touch Configuration
   ### System > Administration
     - Password must be changed every 90 days (not that reccomended, honestly)
@@ -114,5 +99,46 @@
     - Turn on 'Apply IPS Signatures Bidirectionally'
     - Allow launching of AppFlow monitor in stand-alone browser frame
     - Enable Visualization UI for Non-Admin/Config Users
+## SYSTEM
+  ### System >>> Administration
+    - For PCI/Better Security: Change super user administration account from ‘admin’
+    - Enable Enhanced Audit Logging (new in 6.2.5 for UC APL certification)
+    - Change HTTPS management port from 443 to other (i.e. 8443)
+    - Change the default Admin Timeout from 5 minutes, to your preferred amount
+  ### System >>> Time
+    - Set time automatically using NTP
+    - Don’t configure additional NTP Servers unless needed for internal synchronization
+  ### System >>> Diagnostics
+    - Check Network Settings
+    - Note that “Content Filtering” will fail until licensed or if UDP/2257 is blocked from SonicWALL Firewall to SonicWALL GRID CFS Servers. https://support.software.dell.com/kb/sw9405
+    - MTU Discovery: Paste determined value into WAN/Internet interface used in test
+    - Note: Some ISP’s values change each time you test. In that case review ISP’s KB for optimum MTU
 
 ## Network
+  ### Network >>> Interfaces
+    - Link Speed: Set to Auto or, if possible, hard code on both sides to best possible (i.e. 100/full duplex, 1 Gb)
+    - WAN Interfaces and enabling management (don’t open to whole world):
+    - Create Address Objects for external IP addresses that can manage device
+    - Add those to new Address Object Group created for this purpose
+    - Edit WAN:WAN HTTPS and HTTP Management auto rules and change Source to newly created group (Note: Alternatively VPN first to manage firewall)
+### Network >>> Zones
+  - Make sure all desired security services are enforced on proper zones
+  - Network >>> Services:
+  - “Any” in firewall policy does not mean ‘any’ unless firewall knows about the service. Therefore, add any Services required but not present.
+  - Log Event ID 41: Network Access >>> Unknown Protocol Dropped will expose these
+### Network Address Translation
+  - On outbound policy, select specific outbound Interface (Not recommended to use “Any”)
+  - On inbound policy, select specific inbound Interface (Public Server Wizard sets this to Any)
+  - If you use Public Server Wizard:
+  - Only use once to show/use as a reference then manually create additional Firewall/NAT policies
+  - While the Wizard is good for creating a quick policy, it’s recommended to build policies manually for learning purposes (not to mention the Wizard creates 3 policies each time).
+  - Rename & change PSW inbound NAT policy’s inbound Interface from Any to specific interface
+  - Don’t create unnecessary Loopback policies
+  - Outbound Many-to-Few : Use Address Object type Range for Source Translated. Range preferred because of predictable outcome. Example of why to use this: YouTube can blacklist a university due to too many connections from one WAN IP. (Note: This is if you own a block of IP addresses)
+  - NEVER set Service Translated to same Service as Service Original, always use ORIGINAL or PAT Port. This could occur due to replicating a config from another manufacturer's firewall
+  - Good idea to NOT use firewall's Primary WAN IP (or other high priority IP in Subnet, such as your outbound email SMTP IP) for Guest network’s Outbound NAT Policy. This protects against blacklisting.
+## Firewall Settings
+  ### Firewall Settings > Advanced
+    - Enable Stealth Mode, Enable Randomize IP ID & Enable Decrement IP TTL for forwarded traffic.
+    - KB Article Reference: https://support.sonicwall.com/kb/sw12547
+    - Choose best “Connections” setting. There is a Help icon you can mouse-over to view these values. If connections in ‘DPI Connections’ mode is enough, use that as it has best DPI performance. (Allocates more memory to DPI/Requires a reboot)
